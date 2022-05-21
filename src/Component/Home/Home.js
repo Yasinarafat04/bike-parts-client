@@ -1,3 +1,4 @@
+import { Button, Link } from '@mui/material'
 import React from 'react'
 import bannerImg from '../Images/banner.jpg'
 const Home = () => {
@@ -13,7 +14,8 @@ const Home = () => {
                             <p className="py-6 text-left">
                                 We Provide All Type Of Motor Bike's Parts And Accessories</p>
                             <div className='flex justify-start'>
-                            <button className="btn btn-primary text-white">Get Started</button>
+                            <Button href='/uer' size="large" variant="contained">Get Started</Button>
+                           
                             </div>
                         </div>
                         <img src={bannerImg} className="max-w-xl w-full rounded-lg  shadow-2xl" alt='banner img'/>
