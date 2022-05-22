@@ -1,7 +1,11 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
-
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../Firebase/firebase.init';
+import { signOut } from 'firebase/auth';
+import person from '../Images/person.png'
 const Navbar = () => {
+    const [user , loading]=useAuthState(auth)
     return (
         <div className='bg-base-100 shadow-md'>
             <div className="navbar container mx-auto ">
@@ -25,23 +29,23 @@ const Navbar = () => {
                     <div className="dropdown dropdown-end">
                         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                             <div className="w-24 rounded-full">
-                                <img src="https://api.lorem.space/image/face?hash=92310" alt='amar-mata' />
+                                <img src={user ? user.photoURL : person} alt='amar-mata' />
                             </div>
                         </label>
                         <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 border rounded-box w-52">
                             <li>
-                                <button className="justify-between">
-                                    Profile
+                                <Link to='/dashboard' className="justify-between">
+                                    Dash Board
                                     <span className="badge">New</span>
-                                </button>
+                                </Link>
                             </li>
                             <li><button>Settings</button></li>
-                            {/* {
+                            {
                                 user ?
-                                    <li><button >Log Out</button></li>
+                                    <li><button onClick={()=> signOut(auth)}>Log Out</button></li>
                                     :
                                     <li><Link to='/login'>Login</Link></li>
-                            } */}
+                            }
                         </ul>
                     </div>
                 </div>
