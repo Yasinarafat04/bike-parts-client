@@ -1,19 +1,29 @@
 import { Button } from '@mui/material'
 import React from 'react'
+import { useAuthState } from 'react-firebase-hooks/auth'
 import { useQuery } from 'react-query'
 import { Link, useNavigate } from 'react-router-dom'
+import auth from '../Firebase/firebase.init'
 import bannerImg from '../Images/banner.jpg'
 import Loading from '../Loading/Loading'
 import ProductCard from '../Product/ProductCard'
+import ReviewCard from '../Review/ReviewCard'
+import Reviews from '../Review/Reviews'
 const Home = () => {
     const navigate = useNavigate()
+    const [user, loading] = useAuthState(auth)
     const url = 'http://localhost:5100/product'
     const { isLoading, data } = useQuery(['products'], () =>
         fetch(url).then(res =>
             res.json()
         )
     )
-    if (isLoading) {
+    const { isLoading: loading2, data : reviews } = useQuery(['reviews'], () =>
+        fetch('http://localhost:5100/review').then(res =>
+            res.json()
+        )
+    )
+    if (isLoading || loading || loading2) {
         return <Loading />
     }
     return (
@@ -42,11 +52,25 @@ const Home = () => {
                 <h1 className='text-center text-4xl my-5 font-bold'>Our  Products</h1>
                 <div className='grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 mt-10 gap-7'>
                     {
-                        data.slice(0,4).map(product => <ProductCard key={product._id} product={product} />)
+                        data.slice(0, 4).map(product => <ProductCard key={product._id} product={product} />)
                     }
                 </div>
                 <div className='flex justify-center mt-10'><Link to='/product' className='btn btn-primary'>See All Product</Link></div>
             </div>
+            {/* Reviews  */}
+            <div className='container mx-auto'>
+                <h1 className='text-5xl text-center mt-16'>Testimonials</h1>
+                <div className="grid grid-cols-4 mt-14 gap-5">
+                    {
+                        reviews?.slice(0,4).map(review => <ReviewCard key={review._id} review={review} />)
+                    }
+
+                </div>
+                <div className={`flex justify-center`}>
+                    <Link to='/review' className='btn mt-10'>Show All</Link>
+                </div>
+            </div>
+
         </div>
     )
 }

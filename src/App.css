@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.product-order-page{
+    background-color: rgba(0, 0, 0, 0.473);
+}

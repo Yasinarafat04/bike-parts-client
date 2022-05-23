@@ -72,6 +72,7 @@ const Navigations = () => {
                 </Link>
             </li>
             <li className='mx-2'><NavLink to='/services'>Services</NavLink></li>
+            <li className='mx-2'><NavLink to='/review'>Reviews</NavLink></li>
             <li className='mx-2'><NavLink to='/blogs'>Blogs</NavLink></li>
             <li className='mx-2'><NavLink to='/contact'>Contact</NavLink></li>
         </>

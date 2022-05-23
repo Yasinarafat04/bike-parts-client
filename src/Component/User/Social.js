@@ -8,14 +8,14 @@ const Social = () => {
     const [loading, setLoading] = useState(false)
     const provider = new GoogleAuthProvider();
     const location = useLocation()
-    const from = location.state?.pathname || '/'
+    const from = location.state?.from?.pathname || '/'
     const navigate = useNavigate()
     const signIn = () => {
         setLoading(true)
         signInWithPopup(auth, provider)
             .then((result) => {
                 const user = result.user;
-                fetch(`http://localhost:5000/users/${user.email}`, {
+                fetch(`http://localhost:5100/users/${user.email}`, {
                     method: "put",
                     headers: {
                         "content-type": "application/json"

@@ -9,7 +9,7 @@ const Login = () => {
     const [loading , setLoading] = useState(false)
     const [error, setError] = useState('')
     const location = useLocation()
-    const from = location.state?.pathname || '/'
+    const from = location.state?.from?.pathname || '/'
     const navigate = useNavigate()
     const { register, formState: { errors }, handleSubmit } = useForm();
     const onSubmit = (data) => {
@@ -18,7 +18,7 @@ const Login = () => {
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
-                fetch(`http://localhost:5000/users/${user.email}`, {
+                fetch(`http://localhost:5100/users/${user.email}`, {
                     method: "put",
                     headers: {
                         "content-type": "application/json"

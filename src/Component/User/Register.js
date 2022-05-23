@@ -9,7 +9,7 @@ const Register = () => {
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const location = useLocation()
-    const from = location.state?.pathname || '/'
+    const from = location.state?.from?.pathname || '/'
     const navigate = useNavigate()
     const url = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMGBB_API_KEY}`;
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -37,7 +37,7 @@ const Register = () => {
                                 displayName: data.name,
                                 photoURL
                             })
-                            fetch(`http://localhost:5000/users/${user.email}`, {
+                            fetch(`http://localhost:5100/users/${user.email}`, {
                                 method: "PUT",
                                 headers: {
                                     "content-type": "application/json"
