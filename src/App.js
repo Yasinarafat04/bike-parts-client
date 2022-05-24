@@ -1,10 +1,9 @@
-import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import ManageProducts from './Component/Dashboard/ManageProduct';
 import Dashboard from './Component/Dashboard/Dashboard';
 import Footer from './Component/Footer/Footer';
 import Home from './Component/Home/Home';
-import Loading from './Component/Loading/Loading';
 import Navbar from './Component/Navbar/Navbar';
 import Product from './Component/Product/Product';
 import Login from './Component/User/Login';
@@ -17,33 +16,27 @@ import 'react-toastify/dist/ReactToastify.css';
 import Payment from './Component/Dashboard/Payment';
 import Reviews from './Component/Review/Reviews';
 import RequireAuth from './Component/RequireAuth/RequireAuth';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import auth from './Component/Firebase/firebase.init';
 import AllUsers from './Component/Dashboard/AllUsers';
 import About from './Component/About/About';
 import AddReview from './Component/Review/AddReview';
 import Contact from './Component/Contact/Contact';
 import Portfolio from './Component/Portfolio/Portfolio';
 import Profile from './Component/Dashboard/Profile';
+import Blog from './Component/Blog/Blog';
 
 function App() {
-  const navigate = useNavigate()
-  const [user, loading] = useAuthState(auth)
-  const location = useLocation()
+  
   const show = true
-  if (loading) {
-    return <Loading />
-  }
-
   return (
     <div className="App">
       <Navbar />
-      <div className="p-7 lg:p-0">
+      <div className="p-5 lg:p-0">
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/home' element={<Home />} />
           <Route path='/review' element={<Reviews />} />
           <Route path='/about' element={<About />} />
+          <Route path='/blogs' element={<Blog />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/portfolio' element={<Portfolio />} />
           <Route path='/product' element={<Product />} />

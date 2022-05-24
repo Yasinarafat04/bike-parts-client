@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import Social from './Social';
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import auth from '../Firebase/firebase.init';
-import updateUserProfile from '../Portfolio/updateProfile';
 
 const Register = () => {
     const [error, setError] = useState('')

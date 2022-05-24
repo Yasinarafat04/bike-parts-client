@@ -4,9 +4,8 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../Firebase/firebase.init';
 import { signOut } from 'firebase/auth';
 import person from '../Images/person.png'
-import Loading from '../Loading/Loading';
 const Navbar = () => {
-    const [user , loading]=useAuthState(auth)
+const [user , loading]=useAuthState(auth)
 
     return (
         <div className='bg-base-100 shadow-md'>
@@ -21,7 +20,7 @@ const Navbar = () => {
                             <Navigations />
                         </ul>
                     </div>
-                    <Link to='/' className="btn btn-ghost text-neutral normal-case text-2xl">MT Bike's Accessories</Link>
+                    <Link to='/' className="btn btn-ghost text-neutral normal-case text-2xl">Bike's Parts</Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu text-neutral menu-horizontal p-0">
@@ -74,7 +73,6 @@ const Navigations = () => {
                     Products
                 </Link>
             </li>
-            <li className='mx-2'><NavLink to='/services'>Services</NavLink></li>
             <li className='mx-2'><NavLink to='/about'>About</NavLink></li>
             <li className='mx-2'><NavLink to='/portfolio'>Portfolio</NavLink></li>
             <li className='mx-2'><NavLink to='/review'>Reviews</NavLink></li>

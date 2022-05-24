@@ -66,7 +66,7 @@ const Home = () => {
 
             <section className='container mx-auto mt-14'>
 
-                <div className="shadow w-full grid grid-cols-4" >
+                <div className="shadow w-full grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4" >
                     <div className="stat place-items-center">
                         <div className="stat-title">New Orders</div>
                         <div className="stat-value">301</div>
@@ -88,15 +88,15 @@ const Home = () => {
                         <div className="stat-desc">↘︎ 50 (10%)</div>
                     </div>
                 </div>
-                <div className='shadow-2xl p-10 mt-6 w-full flex items-center justify-between'>
+                <div className='shadow-2xl py-5 p-5 lg:p-10 mt-6 w-full lg:flex items-center lg:justify-between'>
                     <div>
                     <h1 className='text-primary text-4xl mb-3 font-bold'>Have any question about us or get a <br/>
                     product request</h1>
                     <h2 className='text-2xl pt-3'>Don't hesitate to contact us</h2>
                     </div>
-                    <div>
-                        <Link to='/dashboard/review' className='btn px-5 btn-primary mr-5'>Write a Review</Link>
-                        <Link to='/contact' className='btn px-5 btn-neutral'>contact ue</Link>
+                    <div className='mt-10 md:mt-0 lg:mt-0'>
+                        <Link to='/dashboard/review' className='btn lg:px-5 btn-primary mr-5'>Write a Review</Link>
+                        <Link to='/contact' className='btn lg:px-5 btn-neutral'>contact ue</Link>
                     </div>
                 </div>
             </section>
@@ -105,7 +105,7 @@ const Home = () => {
             {/* Reviews  */}
             <div className='container mx-auto'>
                 <h1 className='text-5xl text-center mt-16'>Testimonials</h1>
-                <div className="grid grid-cols-4 mt-14 gap-5">
+                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mt-14 gap-5 mt-14 gap-5">
                     {
                         reviews?.slice(0, 4).map(review => <ReviewCard key={review._id} review={review} />)
                     }

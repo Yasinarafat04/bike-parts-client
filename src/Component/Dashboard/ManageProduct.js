@@ -34,7 +34,7 @@ const ManageProducts = () => {
   }
   return (
     <div className='w-full'>
-      <h1 className="text-4xl text-center font-bold">My Orders</h1>
+      <h1 className="text-4xl text-center font-bold">My Product</h1>
 
       <div className="overflow-x-auto w-full mt-10">
         <table className="table-compact w-full">
@@ -65,7 +65,7 @@ const ManageProducts = () => {
                   <td className='text-center'>${product.price}</td>
                   <td className='text-center'>{product.quantity}p</td>
                   <td className='text-center'>
-                    <div>
+                    <div className='flex flex-col lg:flex-row '>
                       <button onClick={() => {
                         setShow(true)
                         setProduct(product)

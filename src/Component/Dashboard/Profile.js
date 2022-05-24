@@ -37,11 +37,11 @@ const Profile = () => {
         return <Loading />
     }
     return (
-        <div className='p-3'>
+        <div className='p-3 w-full'>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="avatar">
                     <div className="w-24 rounded-full">
-                        <img src={user.photoURL} />
+                        <img src={user.photoURL} alt='user avater'/>
                     </div>
                 </div>
                 <p className='my-2'>Name : {user.displayName}</p>
@@ -65,10 +65,10 @@ const Profile = () => {
 
                     <span className='block'>Github</span>
                     <input type="text " {...register("github", { value: data?.others?.github ? data?.others?.github : "Your Link" })}
-                        disabled={!edit} className={`${edit && "border"}w-full p-2 my-3`} />
+                        disabled={!edit} className={`${edit && "border"} w-full p-2 my-3`} />
                 </div>
                 <p className="font-bold mt-4">Skills</p>
-                <div className="links mt-4">
+                <div className="links mt-4 grid grid-cols-2 lg:grid-cols-4">
                     <input type="text " placeholder={`${edit && "Add Your Skill Here"}`} {...register("skill1", { value: data?.others?.skill1 })} disabled={!edit} className={`${edit && "border"} p-2 mt-3`} />
                     <input type="text " placeholder={`${edit && "Add Your Skill Here"}`} {...register("skill2", { value: data?.others?.skill2 })} disabled={!edit} className={`${edit && "border"} p-2 mt-3`} />
                     <input type="text " placeholder={`${edit && "Add Your Skill Here"}`} {...register("skill3", { value: data?.others?.skill3 })} disabled={!edit} className={`${edit && "border"} p-2 mt-3`} />
@@ -80,7 +80,9 @@ const Profile = () => {
                     edit && <button type='submit' className='btn mt-4 btn-md'>Update</button>
                 }
             </form>
-            <button onClick={() => setEdit(true)} className='btn mt-4 btn-md'>Edit Profile</button>
+            {
+                !edit && <button onClick={() => setEdit(true)} className='btn mt-4 btn-md'>Edit Profile</button>
+            }
         </div>
     )
 }

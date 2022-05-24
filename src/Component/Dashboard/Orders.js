@@ -1,7 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { useQuery } from 'react-query'
-import { Link } from 'react-router-dom'
 import Loading from '../Loading/Loading'
 import Payment from './Payment'
 

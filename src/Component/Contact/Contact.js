@@ -2,7 +2,7 @@ import React from 'react'
 
 const Contact = () => {
     return (
-        <div className='mt-16'>
+        <div className='mt-16 mx-auto'>
             <h1 className="text-center text-5xl">Contact Us</h1>
             <form className="card w-full p-7 max-w-lg shadow-2xl mx-auto" >
                 <div className="form-control mt-3">

@@ -53,7 +53,7 @@ const Users = ({ data, refetch }) => {
   }
   return (
     <div className="overflow-x-auto mt-10 w-full">
-      <table className="table w-full">
+      <table className="table-compact  w-full">
         {/* head */}
         <thead>
           <tr>
@@ -106,11 +106,11 @@ const Admins = ({ data, refetch }) => {
   }
   return (
     <div className="overflow-x-auto mt-10 w-full">
-      <table className="table w-full">
+      <table className="table-compact w-full">
         {/* head */}
         <thead>
           <tr>
-            <th />
+            
             <th>Avater</th>
             <th>Name</th>
             <th>Email</th>
@@ -120,9 +120,9 @@ const Admins = ({ data, refetch }) => {
         </thead>
         <tbody>
           {
-            data.map(((user, index) =>
+            data.map(((user) =>
               <tr className={user.role === "admin" ? "visivle" : "hidden"} key={user._id}>
-                <th>{index + 1}</th>
+                
                 <td>
                   <div className="avatar">
                     <div className="w-16 rounded-xl">
