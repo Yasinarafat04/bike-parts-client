@@ -13,7 +13,7 @@ const Orders = () => {
         fetch(url, {
             method: "get",
             headers: {
-                auth : localStorage.getItem('accessToken')
+                auth: localStorage.getItem('accessToken')
             }
         }).then(res =>
             res.json()
@@ -23,8 +23,8 @@ const Orders = () => {
         axios({
             method: 'delete',
             url: `http://localhost:5100/order/${id}`,
-            headers:{
-                auth : localStorage.getItem('accessToken')
+            headers: {
+                auth: localStorage.getItem('accessToken')
             }
         })
             .then(function (response) {
@@ -38,7 +38,6 @@ const Orders = () => {
     return (
         <div className='w-full'>
             <h1 className="text-4xl text-center font-bold">My Orders</h1>
-
             <div className="overflow-x-auto w-full mt-10">
                 <table className="table-compact w-full">
                     {/* head */}
@@ -95,7 +94,7 @@ const Orders = () => {
 export default Orders
 
 const PaymentModal = ({ show, setShow, order }) => {
-    
+
     return (
         <div className={`${show ? 'block' : "hidden"} absolute product-order-page top-0 right-0 z-10 w-full`}>
             <div className="hero min-h-screen">

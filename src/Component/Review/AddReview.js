@@ -39,7 +39,7 @@ const AddReview = ({ refetch, show }) => {
         return <Loading />
     }
     return (
-        <div className={`mt-10 ${show ? "block" : 'hidden'} card w-full max-w-md p-7`}>
+        <div className={` ${show ? "block" : 'hidden'} card w-full max-w-md p-7`}>
             <div className="flex items-center my-4">
                 <div className="avatar">
                     <div className="w-16 rounded-full">

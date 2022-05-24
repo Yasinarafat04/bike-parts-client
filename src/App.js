@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import './App.css';
 import ManageProducts from './Component/Dashboard/ManageProduct';
 import Dashboard from './Component/Dashboard/Dashboard';
@@ -20,10 +20,12 @@ import RequireAuth from './Component/RequireAuth/RequireAuth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from './Component/Firebase/firebase.init';
 import AllUsers from './Component/Dashboard/AllUsers';
+import About from './Component/About/About';
 
 function App() {
   const navigate = useNavigate()
   const [user, loading] = useAuthState(auth)
+  const location = useLocation()
   if (loading) {
     return <Loading />
   }
@@ -36,6 +38,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/home' element={<Home />} />
           <Route path='/review' element={<Reviews />} />
+          <Route path='/about' element={<About />} />
           <Route path='/product' element={<Product />} />
           <Route path='/product/:id' element={<RequireAuth>
             <ProductDetails />
@@ -47,19 +50,19 @@ function App() {
           </RequireAuth>}>
             {
               user &&
-              <>
-                <Route index element={<Orders />} />
-                <Route path='products-add' element={<AddProduct />} />
-                <Route path='orders' element={<Orders />} />
-                <Route path='payment' element={<Payment />} />
-                <Route path='products-manage' element={<ManageProducts />} />
-                <Route path='all-users' element={<AllUsers />} />
-              </>
+                <>
+                  <Route index element={<Orders />} />
+                  <Route path='products-add' element={<AddProduct />} />
+                  <Route path='orders' element={<Orders />} />
+                  <Route path='payment' element={<Payment />} />
+                  <Route path='products-manage' element={<ManageProducts />} />
+                  <Route path='all-users' element={<AllUsers />} />
+                </>
             }
           </Route>
         </Routes>
       </div>
-      <ToastContainer draggable={true} />
+      <ToastContainer  />
       <Footer />
     </div>
   );

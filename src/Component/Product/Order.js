@@ -27,7 +27,8 @@ const Order = ({ product, show, setShow }) => {
             fetch('http://localhost:5100/order/add', {
                 method: 'Post',
                 headers: {
-                    'content-type': 'application/json'
+                    'content-type': 'application/json',
+                    auth: localStorage.getItem('accessToken')
                 },
                 body: JSON.stringify({ email, name, totalPrice, price: product.price, quantity, image , phone })
             })

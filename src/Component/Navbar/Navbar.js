@@ -4,8 +4,10 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../Firebase/firebase.init';
 import { signOut } from 'firebase/auth';
 import person from '../Images/person.png'
+import Loading from '../Loading/Loading';
 const Navbar = () => {
     const [user , loading]=useAuthState(auth)
+
     return (
         <div className='bg-base-100 shadow-md'>
             <div className="navbar container mx-auto ">
@@ -18,18 +20,18 @@ const Navbar = () => {
                             <Navigations />
                         </ul>
                     </div>
-                    <Link to='/' className="btn btn-ghost text-neutral normal-case text-2xl">Bike's Accessories</Link>
+                    <Link to='/' className="btn btn-ghost text-neutral normal-case text-2xl">MT Bike's Accessories</Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu text-neutral menu-horizontal p-0">
                         <Navigations />
                     </ul>
                 </div>
-                <div className="navbar-end">
-                    <div className="dropdown dropdown-end">
-                        <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                            <div className="w-24 rounded-full">
-                                <img src={user ? user.photoURL : person} alt='amar-mata' />
+                <div className="navbar-end ">
+                    <div className="dropdown dropdown-end ">
+                        <label tabIndex={0} className={`${loading && "loading"} btn btn-ghost  btn-circle avatar`}>
+                            <div className="w-24 rounded-full ">
+                                <img  src={user ? user.photoURL : person} alt='amar-mata' />
                             </div>
                         </label>
                         <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 border rounded-box w-52">
@@ -72,6 +74,7 @@ const Navigations = () => {
                 </Link>
             </li>
             <li className='mx-2'><NavLink to='/services'>Services</NavLink></li>
+            <li className='mx-2'><NavLink to='/about'>About</NavLink></li>
             <li className='mx-2'><NavLink to='/review'>Reviews</NavLink></li>
             <li className='mx-2'><NavLink to='/blogs'>Blogs</NavLink></li>
             <li className='mx-2'><NavLink to='/contact'>Contact</NavLink></li>
