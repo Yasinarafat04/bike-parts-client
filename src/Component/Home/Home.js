@@ -4,12 +4,14 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { useQuery } from 'react-query'
 import { Link, useNavigate } from 'react-router-dom'
 import About from '../About/About'
+import Contact from '../Contact/Contact'
 import auth from '../Firebase/firebase.init'
 import bannerImg from '../Images/banner.jpg'
 import Loading from '../Loading/Loading'
 import ProductCard from '../Product/ProductCard'
 import ReviewCard from '../Review/ReviewCard'
 const Home = () => {
+    
     const navigate = useNavigate()
     const [user, loading] = useAuthState(auth)
     const url = 'http://localhost:5100/product'
@@ -63,7 +65,7 @@ const Home = () => {
             </div>
 
             <section className='container mx-auto mt-14'>
-                
+
                 <div className="shadow w-full grid grid-cols-4" >
                     <div className="stat place-items-center">
                         <div className="stat-title">New Orders</div>
@@ -93,7 +95,7 @@ const Home = () => {
                     <h2 className='text-2xl pt-3'>Don't hesitate to contact us</h2>
                     </div>
                     <div>
-                        <Link to='/review' className='btn px-5 btn-primary mr-5'>Write a Review</Link>
+                        <Link to='/dashboard/review' className='btn px-5 btn-primary mr-5'>Write a Review</Link>
                         <Link to='/contact' className='btn px-5 btn-neutral'>contact ue</Link>
                     </div>
                 </div>
@@ -115,7 +117,7 @@ const Home = () => {
             </div>
 
            
-
+            <Contact />
         </div>
     )
 }

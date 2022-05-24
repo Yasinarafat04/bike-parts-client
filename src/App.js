@@ -21,11 +21,16 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from './Component/Firebase/firebase.init';
 import AllUsers from './Component/Dashboard/AllUsers';
 import About from './Component/About/About';
+import AddReview from './Component/Review/AddReview';
+import Contact from './Component/Contact/Contact';
+import Portfolio from './Component/Portfolio/Portfolio';
+import Profile from './Component/Dashboard/Profile';
 
 function App() {
   const navigate = useNavigate()
   const [user, loading] = useAuthState(auth)
   const location = useLocation()
+  const show = true
   if (loading) {
     return <Loading />
   }
@@ -39,6 +44,8 @@ function App() {
           <Route path='/home' element={<Home />} />
           <Route path='/review' element={<Reviews />} />
           <Route path='/about' element={<About />} />
+          <Route path='/contact' element={<Contact />} />
+          <Route path='/portfolio' element={<Portfolio />} />
           <Route path='/product' element={<Product />} />
           <Route path='/product/:id' element={<RequireAuth>
             <ProductDetails />
@@ -48,17 +55,14 @@ function App() {
           <Route path='/dashboard' element={<RequireAuth>
             <Dashboard />
           </RequireAuth>}>
-            {
-              user &&
-                <>
                   <Route index element={<Orders />} />
                   <Route path='products-add' element={<AddProduct />} />
                   <Route path='orders' element={<Orders />} />
+                  <Route path='profile' element={<Profile />} />
+                  <Route path='review' element={<AddReview show={show}/>} />
                   <Route path='payment' element={<Payment />} />
                   <Route path='products-manage' element={<ManageProducts />} />
                   <Route path='all-users' element={<AllUsers />} />
-                </>
-            }
           </Route>
         </Routes>
       </div>

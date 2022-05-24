@@ -22,12 +22,13 @@ const AddReview = ({ refetch, show }) => {
                 },
                 body: JSON.stringify({ date: dateToday, username: user.displayName, email: user.email, desc, rating, image: user.photoURL })
             }).then(res => {
-                setSubmitting(true)
+                
                 if (res.status === 200) {
                     setRateing(0)
                     setDesc('')
                     toast.success("Review Added SuccessFul")
                     refetch()
+                    setSubmitting(false)
                 }
             })
         }

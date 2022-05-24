@@ -19,6 +19,7 @@ const Dashboard = () => {
                         {/* Sidebar content here */}
                         <li><NavLink className='border-r-2 mt-2 border-primary' to='profile'>Profile</NavLink></li>
                         <li><NavLink className='border-r-2 mt-2 border-primary' to='all-users'>All Users</NavLink></li>
+                        <li><NavLink className='border-r-2 mt-2 border-primary' to='review'>Write A Review</NavLink></li>
                         <li><NavLink className='border-r-2 mt-2 border-primary' to='orders'>My Orders</NavLink></li>
                         <li><NavLink className='border-r-2 mt-2 border-primary' to='products-add'>Add Products</NavLink></li>
                         <li><NavLink className='border-r-2 mt-2 border-primary' to='products-manage'>Manage Product</NavLink></li>

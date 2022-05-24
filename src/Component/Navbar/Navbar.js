@@ -10,6 +10,7 @@ const Navbar = () => {
 
     return (
         <div className='bg-base-100 shadow-md'>
+            
             <div className="navbar container mx-auto ">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -75,6 +76,7 @@ const Navigations = () => {
             </li>
             <li className='mx-2'><NavLink to='/services'>Services</NavLink></li>
             <li className='mx-2'><NavLink to='/about'>About</NavLink></li>
+            <li className='mx-2'><NavLink to='/portfolio'>Portfolio</NavLink></li>
             <li className='mx-2'><NavLink to='/review'>Reviews</NavLink></li>
             <li className='mx-2'><NavLink to='/blogs'>Blogs</NavLink></li>
             <li className='mx-2'><NavLink to='/contact'>Contact</NavLink></li>

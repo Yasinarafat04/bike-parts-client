@@ -10,12 +10,14 @@ import ReviewCard from './ReviewCard'
 const Reviews = () => {
     const [show, setShow] = useState(false)
     const [user, loading] = useAuthState(auth)
+    const [review , setReview] = useState()
     const navigate = useNavigate()
     const { isLoading, data, refetch } = useQuery(['reviews'], () =>
         fetch('http://localhost:5100/review').then(res =>
             res.json()
         )
     )
+    
     const addReview = () => {
         if (user) {
             if (show) {
@@ -30,6 +32,7 @@ const Reviews = () => {
             navigate('/login')
         }
     }
+
     if (isLoading || loading) {
         return <Loading />
     }
@@ -42,9 +45,9 @@ const Reviews = () => {
             {
                 show && user ? <AddReview refetch={refetch} show={show} /> : <></>
             }
-            <div className="grid grid-cols-4 mt-14 gap-5">
+            <div className="grid grid-cols-4  mt-14 gap-5">
                 {
-                    data.map(review => <ReviewCard key={review._id} review={review} />)
+                    data?.map(review => <ReviewCard key={review._id} review={review} />)
                 }
 
             </div>
