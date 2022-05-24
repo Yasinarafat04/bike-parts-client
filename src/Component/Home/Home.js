@@ -63,6 +63,7 @@ const Home = () => {
             </div>
 
             <section className='container mx-auto mt-14'>
+                
                 <div className="shadow w-full grid grid-cols-4" >
                     <div className="stat place-items-center">
                         <div className="stat-title">New Orders</div>
