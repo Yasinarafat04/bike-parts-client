@@ -8,12 +8,9 @@ import Loading from '../Loading/Loading'
 import Payment from './Payment'
 
 const Orders = () => {
-    const [user, loading] = useAuthState(auth)
-    const url = `http://localhost:5100/order/${user.email}`
+    const url = `http://localhost:5100/order/`
     const [show, setShow] = useState(false)
-    const [showDel, setshowDel] = useState(false)
     const [order, setOrder] = useState({})
-    const [id, setId] = useState('')
     const [clientSecret, setClientSecret] = useState("");
 
     const { isLoading, data, refetch } = useQuery(['Orders'], () =>
@@ -28,11 +25,18 @@ const Orders = () => {
     )
 
     const deleteOrder = (id) => {
-        setId(id)
-        setshowDel(true)
+        axios({
+            method: 'delete',
+            url: `https://pero-assignment-12.herokuapp.com/order/${id}`,
+            headers: {
+                auth: localStorage.getItem('accessToken')
+            }
+        })
+            .then(function (response) {
+                console.log(response.data)
+                refetch()
+            });
     }
-
-
     function goForPay() {
         setShow(true)
         fetch("http://localhost:5100/payment/create-payment-intent", {
@@ -51,12 +55,12 @@ const Orders = () => {
                 setClientSecret(data.clientSecret)
             });
     }
-    if (isLoading || loading) {
+    if (isLoading) {
         return <Loading />
     }
     return (
         <div className='w-full'>
-            <h1 className="text-4xl text-center font-bold">My Orders</h1>
+            <h1 className="text-4xl text-center font-bold">All Orders</h1>
             <div className="overflow-x-auto w-full mt-10">
                 <table className="table-compact w-full">
                     {/* head */}
@@ -93,16 +97,16 @@ const Orders = () => {
                                     <td className='text-center'>{product.phone}</td>
                                     <td className='text-center'>
                                         <div>
-                                            {
-                                                product.position === "paid" ?
-                                                    <p className='text-xl pb-2 text-primary'>Processing..</p>
-                                                    :
-                                                    <button onClick={() => {
-                                                        goForPay()
-                                                        setOrder(product)
-                                                    }} to='/dashboard/payment' className="btn btn-primary mr-4">pay</button>
-
-                                            }
+                                           {
+                                           product.position === "paid" ? 
+                                           <p className='text-xl pb-2 text-primary'>Processing..</p>
+                                           :
+                                           <button onClick={() => {
+                                                goForPay()
+                                                setOrder(product)
+                                            }} to='/dashboard/payment' className="btn btn-primary mr-4">Not paid</button>
+                                            
+                                        }
                                             {
                                                 product.position === "paid" ? <p className='text-green-500'>Trans Id : {product.paymentInfo.transactionId}</p>
                                                     :
@@ -114,15 +118,14 @@ const Orders = () => {
                     </tbody>
                 </table>
             </div>
-            <ConfirmModal showDel={showDel} setshowDel={setshowDel} id={id} refetch={refetch} />
-            <PaymentModal show={show} setShow={setShow} order={order} clientSecret={clientSecret} refetch={refetch}/>
+            <PaymentModal show={show} setShow={setShow} order={order} clientSecret={clientSecret} />
         </div>
     )
 }
 
 export default Orders
 
-const PaymentModal = ({ show, setShow, order, clientSecret, refetch }) => {
+const PaymentModal = ({ show, setShow, order, clientSecret }) => {
 
     return (
         <div className={`${show && clientSecret ? 'block' : "hidden"} absolute product-order-page top-0 right-0 z-10 w-full`}>
@@ -132,36 +135,9 @@ const PaymentModal = ({ show, setShow, order, clientSecret, refetch }) => {
                     <div className="card relative w-full max-w-md shadow-2xl bg-base-100">
                         <button className='absolute top-0 right-0 bg-red-500 p-2 text-white' onClick={() => setShow(false)}>Close</button>
                         <div className="card-body w-full">
-                            <Payment order={order} clientSecret={clientSecret} setShow={setShow} refetch={refetch}/>
+                            <Payment order={order} clientSecret={clientSecret} />
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    )
-}
-
-
-const ConfirmModal = ({ id, refetch, setshowDel, showDel }) => {
-    function deletProduct() {
-        axios.delete(`https://pero-assignment-12.herokuapp.com/order/${id}`, {
-            headers: {
-                auth: localStorage.getItem('accessToken')
-            }
-        })
-            .then(res => {
-                console.log(res)
-                refetch()
-                setshowDel(false)
-            })
-    }
-    return (
-        <div className={`${showDel ? "flex" : "hidden"} overlay-modal z-10`}>
-            <div className="card p-10 flex flex-cols items-center justify-center max-w-lg w-full bg-base-100 shadow-2xl">
-                <h1>Are You Sure You Want To Delete This</h1>
-                <div className="flex mt-5">
-                    <button onClick={deletProduct} className='btn btn-error text-white btn-md bg-red-500'>Delete</button>
-                    <button className='btn btn-success ml-3 text-white btn-md bg-green-500' onClick={() => setshowDel(false)}>Close</button>
                 </div>
             </div>
         </div>

@@ -10,7 +10,7 @@ const AllUsers = () => {
         auth : localStorage.getItem('accessToken')
       }
     }).then(res =>
-      res.json()
+       res.json()
     )
   )
   const [role, setRole] = useState('am-public')

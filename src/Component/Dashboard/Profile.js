@@ -10,7 +10,12 @@ const Profile = () => {
     const [edit, setEdit] = useState(false)
     const { register, handleSubmit, } = useForm();
     const { isLoading, data, refetch } = useQuery(['Profiles'], () =>
-        fetch(`https://pero-assignment-12.herokuapp.com/profile/${user.email}`).then(res =>
+        fetch(`https://pero-assignment-12.herokuapp.com/profile/${user.email}`, {
+            method: "get",
+            headers: {
+                auth: localStorage.getItem('accessToken')
+            }
+        }).then(res =>
             res.json()
         )
     )
@@ -41,7 +46,7 @@ const Profile = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="avatar">
                     <div className="w-24 rounded-full">
-                        <img src={user.photoURL} alt='user avater'/>
+                        <img src={user.photoURL} alt='user avater' />
                     </div>
                 </div>
                 <p className='my-2'>Name : {user.displayName}</p>
@@ -68,13 +73,13 @@ const Profile = () => {
                         disabled={!edit} className={`${edit && "border"} w-full p-2 my-3`} />
                 </div>
                 <p className="font-bold mt-4">Skills</p>
-                <div className="links mt-4 grid grid-cols-2 lg:grid-cols-4">
-                    <input type="text " placeholder={`${edit && "Add Your Skill Here"}`} {...register("skill1", { value: data?.others?.skill1 })} disabled={!edit} className={`${edit && "border"} p-2 mt-3`} />
-                    <input type="text " placeholder={`${edit && "Add Your Skill Here"}`} {...register("skill2", { value: data?.others?.skill2 })} disabled={!edit} className={`${edit && "border"} p-2 mt-3`} />
-                    <input type="text " placeholder={`${edit && "Add Your Skill Here"}`} {...register("skill3", { value: data?.others?.skill3 })} disabled={!edit} className={`${edit && "border"} p-2 mt-3`} />
-                    <input type="text " placeholder={`${edit && "Add Your Skill Here"}`} {...register("skill4", { value: data?.others?.skill4 })} disabled={!edit} className={`${edit && "border"} p-2 mt-3`} />
-                    <input type="text " placeholder={`${edit && "Add Your Skill Here"}`} {...register("skill5", { value: data?.others?.skill5 })} disabled={!edit} className={`${edit && "border"} p-2 mt-3`} />
-                    <input type="text " placeholder={`${edit && "Add Your Skill Here"}`} {...register("skill6", { value: data?.others?.skill6 })} disabled={!edit} className={`${edit && "border"} p-2 mt-3`} />
+                <div className={`${edit || data.others ? "sdsd" : "hidden"} links mt-4 grid grid-cols-2 lg:grid-cols-4`}>
+                    <input type="text "  {...register("skill1", { value: data?.others?.skill1 })} disabled={!edit} className={`${edit && "border"} p-2 mt-3`} />
+                    <input type="text "  {...register("skill2", { value: data?.others?.skill2 })} disabled={!edit} className={`${edit && "border"} p-2 mt-3`} />
+                    <input type="text "  {...register("skill3", { value: data?.others?.skill3 })} disabled={!edit} className={`${edit && "border"} p-2 mt-3`} />
+                    <input type="text "  {...register("skill4", { value: data?.others?.skill4 })} disabled={!edit} className={`${edit && "border"} p-2 mt-3`} />
+                    <input type="text " {...register("skill5", { value: data?.others?.skill5 })} disabled={!edit} className={`${edit && "border"} p-2 mt-3`} />
+                    <input type="text "  {...register("skill6", { value: data?.others?.skill6 })} disabled={!edit} className={`${edit && "border"} p-2 mt-3`} />
                 </div>
                 {
                     edit && <button type='submit' className='btn mt-4 btn-md'>Update</button>

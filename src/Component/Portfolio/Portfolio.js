@@ -7,7 +7,7 @@ const Portfolio = () => {
       <div className="my-inpo mb-5 py-5">
         <div className="avatar">
           <div className="w-32 rounded">
-            <img src="https://api.lorem.space/image/face?hash=88560" />
+            <img src="https://i.ibb.co/Ny78SRG/278309870-1131012231011981-6232825432157365218-n.jpg" alt='my avater'/>
           </div>
         </div>
         <h1 className='font-bold'>Name : <span className='font-normal'>Md Tomiz Uddin</span></h1>

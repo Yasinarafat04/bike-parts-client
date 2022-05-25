@@ -6,28 +6,23 @@ import Loading from '../Loading/Loading'
 
 const ManageProducts = () => {
   const [show, setShow] = useState(false)
+  const [showDel, setshowDel] = useState(false)
   const [product1, setProduct] = useState({})
+  const [id , setId] = useState('')
   const url = 'https://pero-assignment-12.herokuapp.com/product'
   const { isLoading, data, refetch } = useQuery(['Product'], () =>
-    fetch(url,{
+    fetch(url, {
       method: "get",
       headers: {
-        auth : localStorage.getItem('accessToken')
+        auth: localStorage.getItem('accessToken')
       }
     }).then(res =>
       res.json()
     )
   )
   function deletProduct(id) {
-    axios.delete(`https://pero-assignment-12.herokuapp.com/product/${id}`, {
-      headers: {
-        auth : localStorage.getItem('accessToken')
-      }
-    })
-      .then(res => {
-        console.log(res)
-        refetch()
-      })
+    setshowDel(true)
+    setId(id)
   }
   if (isLoading) {
     return <Loading />
@@ -73,7 +68,6 @@ const ManageProducts = () => {
                         className="btn btn-primary mr-4">Update</button>
                       <button className="btn btn-error" onClick={() => {
                         deletProduct(product._id)
-
                       }}>Delete</button>
                     </div>
                   </td>
@@ -82,12 +76,40 @@ const ManageProducts = () => {
           </tbody>
         </table>
       </div>
+      <ConfirmModal showDel={showDel} setshowDel={setshowDel} id={id} refetch={refetch}/>
       <Modal show={show} setShow={setShow} product={product1} refetch={refetch} />
     </div>
   )
 }
 
 export default ManageProducts
+
+const ConfirmModal = ({id , refetch , setshowDel , showDel}) => {
+  function deletProduct() {
+    axios.delete(`https://pero-assignment-12.herokuapp.com/product/${id}`, {
+      headers: {
+        auth: localStorage.getItem('accessToken')
+      }
+    })
+      .then(res => {
+        console.log(res)
+        refetch()
+      })
+  }
+  return (
+    <div className={`${showDel ? "flex" : "hidden"} overlay-modal z-10`}>
+      <div className="card p-10 flex flex-cols items-center justify-center max-w-lg w-full bg-base-100 shadow-2xl">
+        <h1>Are You Sure You Want To Delete This</h1>
+        <div className="flex mt-5">
+        <button onClick={deletProduct} className='btn btn-error text-white btn-md bg-red-500'>Delete</button>
+        <button className='btn btn-success ml-3 text-white btn-md bg-green-500' onClick={()=> setshowDel(false)}>Close</button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+
 
 const Modal = ({ show, setShow, product, refetch }) => {
   const [loading, setLoading] = useState(false)
@@ -101,7 +123,7 @@ const Modal = ({ show, setShow, product, refetch }) => {
       method: "Put",
       headers: {
         'content-type': 'application/json',
-        auth : localStorage.getItem('accessToken')
+        auth: localStorage.getItem('accessToken')
       },
       body: JSON.stringify(updateValue)
     }).then(res => {

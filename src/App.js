@@ -22,10 +22,13 @@ import AddReview from './Component/Review/AddReview';
 import Contact from './Component/Contact/Contact';
 import Portfolio from './Component/Portfolio/Portfolio';
 import Profile from './Component/Dashboard/Profile';
+import AllOrders from './Component/Dashboard/AllOrders';
 import Blog from './Component/Blog/Blog';
+import useUser from './Component/Hook/useUser';
 
 function App() {
-  
+
+  const [currentUser] = useUser()
   const show = true
   return (
     <div className="App">
@@ -33,6 +36,7 @@ function App() {
       <div className="p-5 lg:p-0">
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='*' element={<Home />} />
           <Route path='/home' element={<Home />} />
           <Route path='/review' element={<Reviews />} />
           <Route path='/about' element={<About />} />
@@ -48,18 +52,23 @@ function App() {
           <Route path='/dashboard' element={<RequireAuth>
             <Dashboard />
           </RequireAuth>}>
-                  <Route index element={<Orders />} />
-                  <Route path='products-add' element={<AddProduct />} />
-                  <Route path='orders' element={<Orders />} />
-                  <Route path='profile' element={<Profile />} />
-                  <Route path='review' element={<AddReview show={show}/>} />
-                  <Route path='payment' element={<Payment />} />
-                  <Route path='products-manage' element={<ManageProducts />} />
-                  <Route path='all-users' element={<AllUsers />} />
+            <Route index element={currentUser?.role === "admin" ? <AllOrders /> : <Orders />} />
+            <Route path='orders' element={currentUser?.role === "admin" ? <AllOrders /> : <Orders />} />
+            <Route path='profile' element={<Profile />} />
+            <Route path='payment' element={<Payment />} />
+            <Route path='review' element={<AddReview show={show} />} />
+            {
+              currentUser?.role === "admin" &&
+              <>
+                <Route path='products-add' element={<AddProduct />} />
+                <Route path='products-manage' element={<ManageProducts />} />
+                <Route path='all-users' element={<AllUsers />} />
+              </>
+            }
           </Route>
         </Routes>
       </div>
-      <ToastContainer  />
+      <ToastContainer />
       <Footer />
     </div>
   );
