@@ -14,7 +14,7 @@ const AddReview = ({ refetch, show }) => {
     const addreview = () => {
         if (user && desc && rating) {
             setSubmitting(true)
-            fetch('http://localhost:5100/review', {
+            fetch('https://pero-assignment-12.herokuapp.com/review', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',

@@ -18,7 +18,7 @@ const Login = () => {
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
-                fetch(`http://localhost:5100/users/${user.email}`, {
+                fetch(`https://pero-assignment-12.herokuapp.com/users/${user.email}`, {
                     method: "put",
                     headers: {
                         "content-type": "application/json"

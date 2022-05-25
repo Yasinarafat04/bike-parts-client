@@ -9,7 +9,7 @@ const ProductDetails = () => {
     const [show, setShow] = useState(false)
     const pathname = location.pathname
     const id = pathname.split('/')
-    const url = `http://localhost:5100/product/${id[2]}`
+    const url = `https://pero-assignment-12.herokuapp.com/product/${id[2]}`
     const { isLoading, data } = useQuery(['One-product'], () =>
         fetch(url, {
             method: "get",

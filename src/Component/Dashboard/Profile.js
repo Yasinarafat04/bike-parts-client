@@ -10,7 +10,7 @@ const Profile = () => {
     const [edit, setEdit] = useState(false)
     const { register, handleSubmit, } = useForm();
     const { isLoading, data, refetch } = useQuery(['Profiles'], () =>
-        fetch(`http://localhost:5100/profile/${user.email}`).then(res =>
+        fetch(`https://pero-assignment-12.herokuapp.com/profile/${user.email}`).then(res =>
             res.json()
         )
     )
@@ -20,7 +20,7 @@ const Profile = () => {
         const others = data
         const profileData = { name, email, others }
         console.log(profileData);
-        fetch(`http://localhost:5100/profile/${email}`, {
+        fetch(`https://pero-assignment-12.herokuapp.com/profile/${email}`, {
             method: "put",
             headers: {
                 'content-type': 'application/json',

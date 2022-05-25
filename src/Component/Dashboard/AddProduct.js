@@ -27,7 +27,7 @@ const AddProduct = () => {
           const description = data.description
           const newProduct = { name, price, quantity, image, description }
           console.log(newProduct)
-          fetch('http://localhost:5100/product', {
+          fetch('https://pero-assignment-12.herokuapp.com/product', {
             method: "Post",
             headers: {
               'content-type': 'application/json',

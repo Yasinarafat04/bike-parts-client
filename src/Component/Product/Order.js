@@ -24,7 +24,7 @@ const Order = ({ product, show, setShow }) => {
         console.log(order)
         if (quantityProduct > quantity && quantity > 300) {
             setError('')
-            fetch('http://localhost:5100/order/add', {
+            fetch('https://pero-assignment-12.herokuapp.com/order/add', {
                 method: 'Post',
                 headers: {
                     'content-type': 'application/json',

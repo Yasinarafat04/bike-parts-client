@@ -5,3 +5,9 @@
 .product-order-page{
     background-color: rgba(0, 0, 0, 0.473);
 }
+.portdetails{
+    display: none;
+}
+#portCard:hover .portdetails{
+    display: block;
+}

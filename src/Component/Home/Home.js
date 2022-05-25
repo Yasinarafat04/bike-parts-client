@@ -11,20 +11,21 @@ import Loading from '../Loading/Loading'
 import ProductCard from '../Product/ProductCard'
 import ReviewCard from '../Review/ReviewCard'
 const Home = () => {
-    
+
     const navigate = useNavigate()
     const [user, loading] = useAuthState(auth)
-    const url = 'http://localhost:5100/product'
+    const url = 'https://pero-assignment-12.herokuapp.com/product'
     const { isLoading, data } = useQuery(['products'], () =>
         fetch(url).then(res =>
             res.json()
         )
     )
-    const { isLoading: loading2, data: reviews } = useQuery(['reviews'], () =>
-        fetch('http://localhost:5100/review').then(res =>
+    const { isLoading : loading2, data: reviews, refetch } = useQuery(['reviews'], () =>
+        fetch('https://pero-assignment-12.herokuapp.com/review').then(res =>
             res.json()
         )
     )
+
     if (isLoading || loading || loading2) {
         return <Loading />
     }
@@ -48,10 +49,10 @@ const Home = () => {
                     </div>
                 </div>
             </header>
-            
-            <About/>
 
-           
+            <About />
+
+
 
 
             <div className='container mx-auto mt-14 '>
@@ -90,9 +91,9 @@ const Home = () => {
                 </div>
                 <div className='shadow-2xl py-5 p-5 lg:p-10 mt-6 w-full lg:flex items-center lg:justify-between'>
                     <div>
-                    <h1 className='text-primary text-4xl mb-3 font-bold'>Have any question about us or get a <br/>
-                    product request</h1>
-                    <h2 className='text-2xl pt-3'>Don't hesitate to contact us</h2>
+                        <h1 className='text-primary text-4xl mb-3 font-bold'>Have any question about us or get a <br />
+                            product request</h1>
+                        <h2 className='text-2xl pt-3'>Don't hesitate to contact us</h2>
                     </div>
                     <div className='mt-10 md:mt-0 lg:mt-0'>
                         <Link to='/dashboard/review' className='btn lg:px-5 btn-primary mr-5'>Write a Review</Link>
@@ -100,8 +101,6 @@ const Home = () => {
                     </div>
                 </div>
             </section>
-
-
             {/* Reviews  */}
             <div className='container mx-auto'>
                 <h1 className='text-5xl text-center mt-16'>Testimonials</h1>
@@ -116,7 +115,7 @@ const Home = () => {
                 </div>
             </div>
 
-           
+
             <Contact />
         </div>
     )

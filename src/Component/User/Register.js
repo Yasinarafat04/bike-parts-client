@@ -37,7 +37,7 @@ const Register = () => {
                                 displayName: data.name,
                                 photoURL
                             })
-                            fetch(`http://localhost:5100/users/${user.email}`, {
+                            fetch(`https://pero-assignment-12.herokuapp.com/users/${user.email}`, {
                                 method: "PUT",
                                 headers: {
                                     "content-type": "application/json"
@@ -49,7 +49,7 @@ const Register = () => {
                                     localStorage.setItem('accessToken', result.token)
                                     setLoading(false)
                                     navigate(from)
-                                    fetch(`http://localhost:5100/profile/${email}`, {
+                                    fetch(`https://pero-assignment-12.herokuapp.com/profile/${email}`, {
                                         method: "put",
                                         headers: {
                                             'content-type': 'application/json',

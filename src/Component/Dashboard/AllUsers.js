@@ -4,7 +4,7 @@ import Loading from '../Loading/Loading'
 
 const AllUsers = () => {
   const { isLoading, data, refetch } = useQuery(['All-Users'], () =>
-    fetch(`http://localhost:5100/users`,{
+    fetch(`https://pero-assignment-12.herokuapp.com/users`,{
       method:"get",
       headers: {
         auth : localStorage.getItem('accessToken')
@@ -43,7 +43,7 @@ export default AllUsers
 
 const Users = ({ data, refetch }) => {
   const makeAdmin = (email) => {
-    fetch(`http://localhost:5100/users/addAdmin/${email}`, {
+    fetch(`https://pero-assignment-12.herokuapp.com/users/addAdmin/${email}`, {
       method: "put",
       headers: {
         auth : localStorage.getItem('accessToken')
@@ -96,7 +96,7 @@ const Users = ({ data, refetch }) => {
 
 const Admins = ({ data, refetch }) => {
   const removeAdmin = (email) => {
-    fetch(`http://localhost:5100/users/removeAdmin/${email}`, {
+    fetch(`https://pero-assignment-12.herokuapp.com/users/removeAdmin/${email}`, {
       method: "put",
       headers: {
         auth : localStorage.getItem('accessToken')

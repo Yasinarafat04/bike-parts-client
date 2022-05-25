@@ -1,13 +1,16 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { useQuery } from 'react-query'
+import { toast } from 'react-toastify'
 import Loading from '../Loading/Loading'
 import Payment from './Payment'
 
 const Orders = () => {
-    const url = 'http://localhost:5100/order'
+    const url = 'https://pero-assignment-12.herokuapp.com/order'
     const [show, setShow] = useState(false)
     const [order, setOrder] = useState({})
+    const [clientSecret, setClientSecret] = useState("");
+
     const { isLoading, data, refetch } = useQuery(['Orders'], () =>
         fetch(url, {
             method: "get",
@@ -18,10 +21,11 @@ const Orders = () => {
             res.json()
         )
     )
+
     const deleteOrder = (id) => {
         axios({
             method: 'delete',
-            url: `http://localhost:5100/order/${id}`,
+            url: `https://pero-assignment-12.herokuapp.com/order/${id}`,
             headers: {
                 auth: localStorage.getItem('accessToken')
             }
@@ -29,6 +33,24 @@ const Orders = () => {
             .then(function (response) {
                 console.log(response.data)
                 refetch()
+            });
+    }
+    function goForPay() {
+        setShow(true)
+        fetch("http://localhost:5100/payment/create-payment-intent", {
+            method: "post",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ price: order.totalPrice }),
+        })
+            .then((res) => {
+                if (res.status === 500) {
+                    toast.error('Server Problem Plz Try Again')
+                }
+                return res.json()
+            })
+            .then((data) => {
+                console.log(data);
+                setClientSecret(data.clientSecret)
             });
     }
     if (isLoading) {
@@ -73,11 +95,14 @@ const Orders = () => {
                                     <td className='text-center'>{product.phone}</td>
                                     <td className='text-center'>
                                         <div>
-                                            <button onClick={() => {
-                                                setShow(true)
+                                            <button disabled={product.position === "paid"} onClick={() => {
+                                                goForPay()
                                                 setOrder(product)
                                             }} to='/dashboard/payment' className="btn btn-primary mr-4">pay</button>
-                                            <button className="btn btn-error" onClick={() => deleteOrder(product._id)}>Delete</button>
+                                            {
+                                                product.position === "paid" ? <p>{product.paymentInfo.transactionId}</p>
+                                                    :
+                                                    <button className="btn btn-error" onClick={() => deleteOrder(product._id)}>Delete</button>}
                                         </div>
                                     </td>
                                 </tr>))
@@ -85,24 +110,24 @@ const Orders = () => {
                     </tbody>
                 </table>
             </div>
-            <PaymentModal show={show} setShow={setShow} order={order} />
+            <PaymentModal show={show} setShow={setShow} order={order} clientSecret={clientSecret} />
         </div>
     )
 }
 
 export default Orders
 
-const PaymentModal = ({ show, setShow, order }) => {
+const PaymentModal = ({ show, setShow, order, clientSecret }) => {
 
     return (
-        <div className={`${show ? 'block' : "hidden"} absolute product-order-page top-0 right-0 z-10 w-full`}>
+        <div className={`${show && clientSecret ? 'block' : "hidden"} absolute product-order-page top-0 right-0 z-10 w-full`}>
             <div className="hero min-h-screen">
                 <div style={{ width: '100%' }} className="hero-content">
 
                     <div className="card relative w-full max-w-md shadow-2xl bg-base-100">
                         <button className='absolute top-0 right-0 bg-red-500 p-2 text-white' onClick={() => setShow(false)}>Close</button>
                         <div className="card-body w-full">
-                            <Payment order={order} />
+                            <Payment order={order} clientSecret={clientSecret} />
                         </div>
                     </div>
                 </div>

@@ -7,7 +7,7 @@ import Loading from '../Loading/Loading'
 const ManageProducts = () => {
   const [show, setShow] = useState(false)
   const [product1, setProduct] = useState({})
-  const url = 'http://localhost:5100/product'
+  const url = 'https://pero-assignment-12.herokuapp.com/product'
   const { isLoading, data, refetch } = useQuery(['Product'], () =>
     fetch(url,{
       method: "get",
@@ -19,7 +19,7 @@ const ManageProducts = () => {
     )
   )
   function deletProduct(id) {
-    axios.delete(`http://localhost:5100/product/${id}`, {
+    axios.delete(`https://pero-assignment-12.herokuapp.com/product/${id}`, {
       headers: {
         auth : localStorage.getItem('accessToken')
       }
@@ -97,7 +97,7 @@ const Modal = ({ show, setShow, product, refetch }) => {
     const quantity = parseInt(e.target.quantity.value) + parseInt(product.quantity)
     const price = parseInt(e.target.price.value)
     const updateValue = { quantity, price }
-    fetch(`http://localhost:5100/product/${product._id}`, {
+    fetch(`https://pero-assignment-12.herokuapp.com/product/${product._id}`, {
       method: "Put",
       headers: {
         'content-type': 'application/json',
