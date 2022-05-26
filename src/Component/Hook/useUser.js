@@ -8,7 +8,7 @@ const useUser = () => {
 
   useEffect(() => {
     if (user) {
-      fetch(`http://localhost:5100/users/${user?.email}`, {
+      fetch(`https://pero-assignment-12.herokuapp.com/users/${user?.email}`, {
         method: 'get',
         headers: {
           auth: localStorage.getItem('accessToken')

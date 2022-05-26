@@ -28,7 +28,7 @@ const ProductDetails = () => {
             <div className="hero py-14 items-start bg-base-200">
                 <div className="hero-content flex-col items-center lg:flex-row">
                     <img src={data.image} className="max-w-lg w-full rounded-lg shadow-2xl" alt='' />
-                    <div className='ml-10'>
+                    <div className='lg:ml-10'>
                         <h1 className="text-3xl font-bold">{data.name}</h1>
                         <p className='mt-5 font-bold text-neutral'>Price : ${data.price}</p>
                         <p className='mt-5 font-bold text-neutral'>Quantity : {data.quantity} p</p>

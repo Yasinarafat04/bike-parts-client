@@ -9,7 +9,7 @@ import Payment from './Payment'
 
 const Orders = () => {
     const [user, loading] = useAuthState(auth)
-    const url = `http://localhost:5100/order/${user.email}`
+    const url = `https://pero-assignment-12.herokuapp.com/order/${user.email}`
     const [show, setShow] = useState(false)
     const [showDel, setshowDel] = useState(false)
     const [order, setOrder] = useState({})
@@ -26,7 +26,7 @@ const Orders = () => {
             res.json()
         )
     )
-
+  
     const deleteOrder = (id) => {
         setId(id)
         setshowDel(true)
@@ -35,7 +35,7 @@ const Orders = () => {
 
     function goForPay() {
         setShow(true)
-        fetch("http://localhost:5100/payment/create-payment-intent", {
+        fetch("https://pero-assignment-12.herokuapp.com/payment/create-payment-intent", {
             method: "post",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ price: order.totalPrice }),

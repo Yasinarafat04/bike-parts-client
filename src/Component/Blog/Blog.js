@@ -32,10 +32,50 @@ const Blog = () => {
         he state starts as { count: 0 }, and we increment state.count when the user clicks a button by calling this.setState(). We’ll use snippets from this class throughout the page.
             `
           }
+          <div className="mockup-code mt-4">
+            <pre data-prefix="$"><code>
+              
+              {
+                `
+        const [count, setCount] = useState(0)
+        //For Changer This Value of Count !
+          we Can Use setCount(4545)
+        Now value Of Count is 4545
+                `
+              }
+              </code></pre>
+          </div>
+
         </p>
 
       </div>
+      <div>
+        <h1 className='text-2xl'>You have an array of products. Each product has a name, price, description, etc. How will you implement a search to find products by name?</h1>
+        <div className="mockup-code p-5 mt-4">
+          <pre data-prefix="Ans"><code className='text-green-500'>
+            {
+              `
+    const Array = [
+    {name : "product1" , price : 5050},
+    {name : "product2" , price : 45650},
+    {name : "product3" , price : 4560},
+    {name : "product4" , price : 405650}
+    ]
 
+    Array.filter((val)=> {
+      if (searchFeildValue === "") {
+        return val
+      }
+      else if(val.name.toLowerCase().includes(searchValue.toLowerCase())){
+        return val
+      }
+    }).map(product => console.log(product))
+              `
+            }
+          </code></pre>
+        </div>
+
+      </div>
     </div>
   )
 }

@@ -8,7 +8,7 @@ import Loading from '../Loading/Loading'
 import Payment from './Payment'
 
 const Orders = () => {
-    const url = `http://localhost:5100/order/`
+    const url = `https://pero-assignment-12.herokuapp.com/order/`
     const [show, setShow] = useState(false)
     const [order, setOrder] = useState({})
     const [clientSecret, setClientSecret] = useState("");
@@ -24,6 +24,7 @@ const Orders = () => {
         )
     )
 
+  
     const deleteOrder = (id) => {
         axios({
             method: 'delete',
@@ -33,15 +34,14 @@ const Orders = () => {
             }
         })
             .then(function (response) {
-                console.log(response.data)
                 refetch()
             });
     }
     function goForPay() {
         setShow(true)
-        fetch("http://localhost:5100/payment/create-payment-intent", {
+        fetch("https://pero-assignment-12.herokuapp.com/payment/create-payment-intent", {
             method: "post",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json", auth: localStorage.getItem('accessToken') },
             body: JSON.stringify({ price: order.totalPrice }),
         })
             .then((res) => {
@@ -54,6 +54,19 @@ const Orders = () => {
                 console.log(data);
                 setClientSecret(data.clientSecret)
             });
+    }
+    const shiped = (id) => {
+        fetch(`https://pero-assignment-12.herokuapp.com/order/shipped/${id}`, {
+            method: "put",
+            headers: {
+                auth: localStorage.getItem('accessToken')
+            },
+        }).then(res => {
+            if (res.status === 200) {
+                toast.success('Product Shipped Success')
+                refetch()
+            }
+        })
     }
     if (isLoading) {
         return <Loading />
@@ -97,20 +110,38 @@ const Orders = () => {
                                     <td className='text-center'>{product.phone}</td>
                                     <td className='text-center'>
                                         <div>
-                                           {
-                                           product.position === "paid" ? 
-                                           <p className='text-xl pb-2 text-primary'>Processing..</p>
-                                           :
-                                           <button onClick={() => {
-                                                goForPay()
-                                                setOrder(product)
-                                            }} to='/dashboard/payment' className="btn btn-primary mr-4">Not paid</button>
-                                            
-                                        }
                                             {
-                                                product.position === "paid" ? <p className='text-green-500'>Trans Id : {product.paymentInfo.transactionId}</p>
-                                                    :
-                                                    <button className="btn btn-error" onClick={() => deleteOrder(product._id)}>Delete</button>}
+                                                product.position !== "shipped" ?
+                                                <>
+                                                    {
+                                                        product.position === "paid" ?
+                                                            <> <p className='text-xl pb-2 text-primary'>Processing..</p>
+                                                                <p className='text-green-500'>Trans Id : {product.paymentInfo.transactionId}</p>
+                                                                <button onClick={() => shiped(product._id)} className='btn btn-sm'>Mark Shipped</button>
+                                                            </>
+
+                                                            :
+                                                            <>
+                                                                <button onClick={() => {
+                                                                    goForPay()
+                                                                    setOrder(product)
+                                                                }} to='/dashboard/payment' className="btn btn-primary mr-4">Not paid</button>
+
+                                                            </>
+
+                                                    }
+
+                                                    {
+                                                        product.position === "paid" ? <></>
+                                                            :
+                                                            <button className="btn btn-error" onClick={() => deleteOrder(product._id)}>Delete</button>}
+                                                </>
+                                                :
+                                                <>
+                                                <button className='btn btn-success'>Status :- Shipped</button>
+                                                </>
+                                            }
+
                                         </div>
                                     </td>
                                 </tr>))

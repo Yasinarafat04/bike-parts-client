@@ -1,7 +1,30 @@
-# Getting Started with Create React App
+# https://bike-accessories2.netlify.app/
+## Md Tomiz Uddin
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Used Dependencies
+- ### Tailwind Css
+- ### daisyui
+- ### Axios
+- ### MUI SomeWhere used
+- ### MUI SomeWhere used
+- ### React Router Dom
+- ### react-toastify
+- ### react-query
+- ### react-firebase-hooks
+- ### react-hook-form
+- ### @stripe/stripe-js
+
+## Pages
+- ### Home
+- ### About us
+- ### Portfolio
+- ### Reviews
+- ### Blogs
+- ### Contact
+- ### Dashboard
+- ### Login
+- ### Register
 ## Available Scripts
 
 In the project directory, you can run:

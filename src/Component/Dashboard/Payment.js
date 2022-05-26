@@ -58,7 +58,7 @@ const CheckoutForm = ({ order, clientSecret , setShow , refetch }) => {
         email: order.email,
         date: date
       }
-      fetch(`http://localhost:5100/order/${order._id}`, {
+      fetch(`https://pero-assignment-12.herokuapp.com/order/${order._id}`, {
         method: "put",
         headers: {
           'content-type': 'application/json',
@@ -76,7 +76,7 @@ const CheckoutForm = ({ order, clientSecret , setShow , refetch }) => {
   };
 
   return (
-    <form className='max-w-md w-full px-10 pb-5 pt-4' onSubmit={handleSubmit}>
+    <form className='max-w-md w-full lg:px-10 pb-5 pt-4' onSubmit={handleSubmit}>
       <p className='pb-2'>Pay For : <span className='font-bold'>
       {order.name}
         </span></p>

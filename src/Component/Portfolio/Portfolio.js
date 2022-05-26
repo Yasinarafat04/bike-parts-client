@@ -13,6 +13,7 @@ const Portfolio = () => {
         <h1 className='font-bold'>Name : <span className='font-normal'>Md Tomiz Uddin</span></h1>
         <h1 className='font-bold'>Email : <span className='font-normal'>mdtomiz.official@gmail.com</span></h1>
         <h1 className='font-bold'>Phone : <span className='font-normal'> +8801824692955</span></h1>
+        <h1 className='font-bold'>Facebook : <span className='font-normal'><a href="https://www.facebook.com/mdtomiz.420/" target={'_blank'} rel="noreferrer">https://www.facebook.com/mdtomiz.420/</a></span></h1>
         <h1 className='font-bold mt-3'>Skills</h1>
         <ul className='grid grid-cols-2 lg:grid-cols-4 gap-3 mt-4 list-disc border p-5'>
           <li>React</li>
@@ -25,7 +26,7 @@ const Portfolio = () => {
           <li>Tailwind</li>
         </ul>
       </div>
-      <div className='grid grid-cols-3 gap-7'>
+      <div className='grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-7'>
         <PortfolioCard to='https://headset-analisis.netlify.app/' image={'https://i.ibb.co/GnypQs0/Screenshot-2022-05-25-at-01-30-39-Headset-Review.png'} name='Product Review website' />
 
         <PortfolioCard image={'https://i.ibb.co/kh5r9g1/Screenshot-2022-05-25-at-01-34-19-React-App.png'}
