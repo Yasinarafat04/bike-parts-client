@@ -7,13 +7,13 @@ const Portfolio = () => {
       <div className="my-inpo mb-5 py-5">
         <div className="avatar">
           <div className="w-32 rounded">
-            <img src="https://i.ibb.co/Ny78SRG/278309870-1131012231011981-6232825432157365218-n.jpg" alt='my avater'/>
+            <img src="https://i.ibb.co/JktTdhc/51449369-2216477448607082-2752566616414748672-n.jpg" alt='my avater' />
           </div>
         </div>
-        <h1 className='font-bold'>Name : <span className='font-normal'>Md Tomiz Uddin</span></h1>
-        <h1 className='font-bold'>Email : <span className='font-normal'>mdtomiz.official@gmail.com</span></h1>
-        <h1 className='font-bold'>Phone : <span className='font-normal'> +8801824692955</span></h1>
-        <h1 className='font-bold'>Facebook : <span className='font-normal'><a href="https://www.facebook.com/mdtomiz.420/" target={'_blank'} rel="noreferrer">https://www.facebook.com/mdtomiz.420/</a></span></h1>
+        <h1 className='font-bold'>Name : <span className='font-normal'>Yasin Arafat</span></h1>
+        <h1 className='font-bold'>Email : <span className='font-normal'>arafarafat05@gmail.com</span></h1>
+        <h1 className='font-bold'>Phone : <span className='font-normal'> +8801840151263</span></h1>
+        <h1 className='font-bold'>Facebook : <span className='font-normal'><a href="https://web.facebook.com/yas.arafatsajiv/" target={'_blank'} rel="noreferrer">https://web.facebook.com/yas.arafatsajiv/</a></span></h1>
         <h1 className='font-bold mt-3'>Skills</h1>
         <ul className='grid grid-cols-2 lg:grid-cols-4 gap-3 mt-4 list-disc border p-5'>
           <li>React</li>

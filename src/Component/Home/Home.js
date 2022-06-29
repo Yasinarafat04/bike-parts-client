@@ -3,7 +3,7 @@ import React from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useQuery } from 'react-query'
 import { Link, useNavigate } from 'react-router-dom'
-import About from '../About/About'
+
 import Contact from '../Contact/Contact'
 import auth from '../Firebase/firebase.init'
 import bannerImg from '../Images/banner.jpg'
@@ -14,13 +14,13 @@ const Home = () => {
 
     const navigate = useNavigate()
     const [user, loading] = useAuthState(auth)
-    const url = 'https://pero-assignment-12.herokuapp.com/product'
+    const url = 'http://localhost:5000/service'
     const { isLoading, data } = useQuery(['products'], () =>
         fetch(url).then(res =>
             res.json()
         )
     )
-    const { isLoading : loading2, data: reviews, refetch } = useQuery(['reviews'], () =>
+    const { isLoading: loading2, data: reviews, refetch } = useQuery(['reviews'], () =>
         fetch('https://pero-assignment-12.herokuapp.com/review').then(res =>
             res.json()
         )
@@ -50,7 +50,7 @@ const Home = () => {
                 </div>
             </header>
 
-            <About />
+
 
 
 

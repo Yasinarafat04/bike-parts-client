@@ -13,9 +13,9 @@ const Footer = () => {
                 </div>
                 <div>
                     <div className="grid grid-flow-col gap-4">
-                        <a href='https://www.facebook.com/mdtomiz.420' target='_blank'><i className="fa-brands text-2xl fa-facebook-f"></i></a>
-                        <a href='https://www.facebook.com/mdtomiz.420' target='_blank'><i className="fa-brands text-2xl fa-twitter"></i></a>
-                        <a href='https://www.facebook.com/mdtomiz.420' target='_blank'><i className="fa-brands text-2xl fa-linkedin"></i></a>
+                        <a href='https://web.facebook.com/yas.arafatsajiv/' target='_blank'><i className="fa-brands text-2xl fa-facebook-f"></i></a>
+                        <a href='https://web.facebook.com/yas.arafatsajiv/' target='_blank'><i className="fa-brands text-2xl fa-twitter"></i></a>
+                        <a href='https://web.facebook.com/yas.arafatsajiv/' target='_blank'><i className="fa-brands text-2xl fa-linkedin"></i></a>
                     </div>
                 </div>
                 <div>
